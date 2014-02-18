@@ -97,10 +97,10 @@ class ExceptionNotifier
       @data       = (env['exception_notifier.exception_data'] || {}).merge(options[:data] || {})
       @sections   = @sections + %w(data) unless @data.empty?
 
-      ActionMailer::Base.smtp_settings = {
-        :address              => ENV['GPA_MAIL_SERVER'],
-        :port                 => ENV['GPA_MAIL_SERVER_PORT']
-      }
+#      ActionMailer::Base.smtp_settings = {
+#        :address              => ENV['GPA_MAIL_SERVER'],
+#        :port                 => ENV['GPA_MAIL_SERVER_PORT']
+#      }
 
       compose_email
     end
