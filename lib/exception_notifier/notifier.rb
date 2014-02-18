@@ -70,7 +70,7 @@ class ExceptionNotifier
           :verbose_subject => default_verbose_subject,
           :normalize_subject => default_normalize_subject,
           :template_path => mailer_name,
-          :smtp_settings => default_smtp_settings,
+          :smtp_settings => ActionMailer::Base.smtp_settings,
           :email_headers => default_email_headers }
       end
 
@@ -96,7 +96,7 @@ class ExceptionNotifier
       @sections   = @options[:sections]
       @data       = (env['exception_notifier.exception_data'] || {}).merge(options[:data] || {})
       @sections   = @sections + %w(data) unless @data.empty?
-      
+
       compose_email
     end
 
@@ -162,9 +162,9 @@ class ExceptionNotifier
       name = @env.nil? ? 'background_exception_notification' : 'exception_notification'
 
       headers = {
-        :to => @options[:exception_recipients], 
+        :to => @options[:exception_recipients],
         :from => @options[:sender_address],
-        :subject => subject, 
+        :subject => subject,
         :template_name => name
       }.merge(@options[:email_headers])
 
@@ -172,9 +172,9 @@ class ExceptionNotifier
         format.text
         format.html if html_mail?
       end
-      
+
       mail.delivery_method.settings.merge!(@options[:smtp_settings]) if @options[:smtp_settings]
-      
+
       mail
     end
 
