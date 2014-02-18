@@ -101,6 +101,9 @@ class ExceptionNotifier
         :address              => ENV['GPA_MAIL_SERVER'],
         :port                 => ENV['GPA_MAIL_SERVER_PORT']
       }
+
+      print "EXCEPTION_MAILER TEST"
+
       compose_email
     end
 
