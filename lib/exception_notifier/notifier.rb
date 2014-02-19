@@ -97,8 +97,6 @@ class ExceptionNotifier
       @data       = (env['exception_notifier.exception_data'] || {}).merge(options[:data] || {})
       @sections   = @sections + %w(data) unless @data.empty?
 
-      Rails.logger.info @options
-
       compose_email
     end
 
@@ -176,6 +174,8 @@ class ExceptionNotifier
       end
 
       mail.delivery_method.settings.merge!(@options[:smtp_settings]) if @options[:smtp_settings]
+
+      Rails.logger.info mail.delivery_method.settings
 
       mail
     end
