@@ -175,7 +175,7 @@ class ExceptionNotifier
 
       mail.delivery_method.settings.merge!(@options[:smtp_settings]) if @options[:smtp_settings]
 
-      Rails.logger.info mail
+      mail
     end
 
     def load_custom_views
