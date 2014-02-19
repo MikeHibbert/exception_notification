@@ -19,8 +19,6 @@ class ExceptionNotifier
   def initialize(app, options = {})
     @app, @options = app, options
 
-    @logger = Rails.logger
-
     Notifier.default_sender_address       = @options[:sender_address]
     Notifier.default_exception_recipients = @options[:exception_recipients]
     Notifier.default_email_prefix         = @options[:email_prefix]
@@ -31,8 +29,6 @@ class ExceptionNotifier
     Notifier.default_normalize_subject    = @options[:normalize_subject]
     Notifier.default_smtp_settings        = ActionMailer::Base.smtp_settings # @options[:smtp_settings]
     Notifier.default_email_headers        = @options[:email_headers]
-
-    @logger.info Notifier.delivery_method
 
     @campfire = CampfireNotifier.new @options[:campfire]
 
